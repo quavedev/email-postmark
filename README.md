@@ -61,6 +61,9 @@ Meteor.methods({
 
 You can provide the `from` as well in the `sendEmail` function.
 
+## Limitations
+
+Meteor `email` package needs to be in the version 2.2 or above. This corresponds to Meteor version 2.4.
 
 ### License
 
