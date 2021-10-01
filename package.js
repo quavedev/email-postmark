@@ -1,0 +1,20 @@
+/* global Package Npm */
+
+Package.describe({
+  name: 'quave:email-postmark',
+  summary: 'Postmark support',
+  version: '1.0.0',
+});
+
+Npm.depends({
+  postmark: '2.7.7',
+});
+
+Package.onUse(api => {
+  api.use(['email'], ['server']);
+
+  api.use('ecmascript');
+  api.use('quave:settings');
+
+  api.mainModule('server.js', 'server');
+});
