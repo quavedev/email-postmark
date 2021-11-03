@@ -48,7 +48,7 @@ export const sendEmail = async (options) => {
       },
       {
         Name: "References",
-        Value: options.references.toString()
+        Value: options.references
       }
     ]
   });
