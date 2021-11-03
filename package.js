@@ -1,9 +1,9 @@
 /* global Package Npm */
 
 Package.describe({
-  name: 'quave:email-postmark',
+  name: 'odem:email-postmark',
   summary: 'Postmark support',
-  version: '1.0.0',
+  version: '1.0.1',
 });
 
 Npm.depends({
