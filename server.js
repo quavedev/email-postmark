@@ -24,6 +24,7 @@ export const sendEmail = async (options) => {
       'email-postmark: Inform a global "from" in the settings or on each call'
     );
   }
+  console.log("options.htmlBody", options.htmlBody);
   return client.sendEmail({
     From: from,
     To: options.to,
@@ -31,7 +32,7 @@ export const sendEmail = async (options) => {
     Bcc: options.bcc,
     Subject: options.subject,
     Tag: options.tag,
-    HtmlBody: options.html,
+    HtmlBody: options.htmlBody,
     ReplyTo: options.replyTo,
     MessageStream: 'outbound',
     TrackOpens: true,
