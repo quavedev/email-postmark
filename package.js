@@ -3,7 +3,7 @@
 Package.describe({
   name: 'odem:email-postmark',
   summary: 'Postmark support',
-  version: '1.0.2',
+  version: '1.0.3',
 });
 
 Npm.depends({

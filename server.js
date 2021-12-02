@@ -55,7 +55,12 @@ export const sendEmail = async (options) => {
 };
 
 Email.customTransport = options => {
-  sendEmail(options)
+  const { to, html} = options;
+  sendEmail({
+    to,
+    htmlBody: html,
+    ...options
+  })
     .then(() => {
       if (settings.isVerbose) {
         // eslint-disable-next-line no-console
