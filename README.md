@@ -1,10 +1,8 @@
-Originally based on `quave:email-postmark`.
 
-This version extends the options
 
-# odem:email-postmark
+# quave:email-postmark
 
-`odem:email-postmark` is a Meteor package that provides a plug-and-play integration with [Postmark](https://postmarkapp.com/).
+`quave:email-postmark` is a Meteor package that provides a plug-and-play integration with [Postmark](https://postmarkapp.com/).
 
 ## Why
 
@@ -17,7 +15,7 @@ We believe we are not reinventing the wheel in this package but what we are doin
 ## Installation
 
 ```sh
-meteor add odem:email-postmark
+meteor add quave:email-postmark
 ```
 
 ## Usage
@@ -29,7 +27,7 @@ You just need to configure your authentication data in the settings if you just 
 ```json
 {
   "packages": {
-    "odem:email-postmark": {
+    "quave:email-postmark": {
       "from": "noreply@yourdomain.com",
       "apiToken": "tttttttt-1111-2222-3333-tttttttttttt"
     }
@@ -44,7 +42,7 @@ Or you need to set the `from` here in the settings or you need to always call th
 If you want to use our code to send emails directly you can also call like below:
 
 ```javascript
-import { sendEmail } from 'meteor/odem:email-postmark';
+import { sendEmail } from 'meteor/quave:email-postmark';
 
 Meteor.methods({
   newEmail(options) {
