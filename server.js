@@ -17,8 +17,8 @@ if (!settings || !settings.apiToken) {
 
 const client = new postmark.ServerClient(settings.apiToken);
 
-export const sendEmail = async ({ to, subject, content, from: fromParam }) => {
-  const from = fromParam || settings.from;
+export const sendEmail = async (options) => {
+  const from = options.from || settings.from;
   if (!from) {
     throw new Meteor.Error(
       'email-postmark: Inform a global "from" in the settings or on each call'
@@ -26,23 +26,40 @@ export const sendEmail = async ({ to, subject, content, from: fromParam }) => {
   }
   return client.sendEmail({
     From: from,
-    To: to,
-    Subject: subject,
-    HtmlBody: content,
+    To: options.to,
+    Cc: options.cc,
+    Bcc: options.bcc,
+    Subject: options.subject,
+    Tag: options.tag,
+    HtmlBody: options.htmlBody,
+    ReplyTo: options.replyTo,
     MessageStream: 'outbound',
+    TrackOpens: true,
+    TrackLinks: "HtmlAndText",
+    Attachments: options.attachments,
+    Headers: [
+      {
+        Name: "Message-ID",
+        Value: options.messageId
+      },
+      {
+        Name: "In-Reply-To",
+        Value: options.inReplyTo
+      },
+      {
+        Name: "References",
+        Value: options.references
+      }
+    ]
   });
 };
 
 Email.customTransport = options => {
-  const { to, subject, html } = options;
-  const overrideOptions = Email.overrideOptionsBeforeSend
-    ? Email.overrideOptionsBeforeSend(options)
-    : {};
+  const { to, html} = options;
   sendEmail({
     to,
-    subject,
-    content: html,
-    ...overrideOptions,
+    htmlBody: html,
+    ...options
   })
     .then(() => {
       if (settings.isVerbose) {

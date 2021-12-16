@@ -1,3 +1,5 @@
+
+
 # quave:email-postmark
 
 `quave:email-postmark` is a Meteor package that provides a plug-and-play integration with [Postmark](https://postmarkapp.com/).
@@ -43,12 +45,8 @@ If you want to use our code to send emails directly you can also call like below
 import { sendEmail } from 'meteor/quave:email-postmark';
 
 Meteor.methods({
-  newEmail({ to, subject, content }) {
-    sendEmail({
-      to,
-      subject,
-      content,
-    })
+  newEmail(options) {
+    sendEmail(options)
       .then(() => {
         console.log(`Email sent to ${to}`);
       })
@@ -57,6 +55,24 @@ Meteor.methods({
       });
   }
 });
+```
+
+possible options are:
+
+```javascript
+options = {
+  to,
+  cc,
+  bcc,
+  from,
+  subject,
+  htmlBody,
+  attachments,
+  replyTo,
+  messageId,
+  inReplyTo,
+  references
+}
 ```
 
 You can provide the `from` as well in the `sendEmail` function.
