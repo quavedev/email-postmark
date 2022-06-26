@@ -34,7 +34,13 @@ export const sendEmail = async ({ to, subject, content, from: fromParam }) => {
 };
 
 Email.customTransport = options => {
-  const { to, subject, html } = options;
+  const { to, subject } = options;
+  let { html } = options;
+
+  if (!html) {
+    html = options.text;
+  }
+  
   const overrideOptions = Email.overrideOptionsBeforeSend
     ? Email.overrideOptionsBeforeSend(options)
     : {};
