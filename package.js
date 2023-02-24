@@ -3,11 +3,11 @@
 Package.describe({
   name: 'quave:email-postmark',
   summary: 'Postmark support',
-  version: '1.0.4',
+  version: '1.1.0',
 });
 
 Npm.depends({
-  postmark: '2.7.7',
+  postmark: '3.0.15',
 });
 
 Package.onUse(api => {

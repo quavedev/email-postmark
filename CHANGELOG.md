@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.0 (2023-02-24)
+
+- Exposes `createPostmarkClientAccount` to call `new postmark.AccountClient`
+- `accountApiToken` prop to configure account client
+- Exposes postmark account client (`getPostmarkClientAccount`)
+- Updates from `postmark` npm package from 2.7.7 to 3.0.15
+
 ## 1.0.4 (2023-02-24)
 
 - Exposes `createPostmarkClient` to call `new postmark.ServerClient`

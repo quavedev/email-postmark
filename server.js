@@ -16,9 +16,13 @@ if (!settings || !settings.apiToken) {
 }
 
 const client = new postmark.ServerClient(settings.apiToken);
+const accountClient = new postmark.AccountClient(settings.accountApiToken);
 
 export const getPostmarkClient = () => client;
 export const createPostmarkClient = ({apiToken}) => new postmark.ServerClient(apiToken);
+
+export const getPostmarkAccountClient = () => accountClient;
+export const createPostmarkAccountClient = ({apiToken}) => new postmark.AccountClient(apiToken);
 
 export const sendEmail = async ({ to, subject, content, from: fromParam, postmarkClient: clientParam, ...rest }) => {
   const postmarkClient = clientParam || client;
