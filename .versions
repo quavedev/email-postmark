@@ -17,6 +17,6 @@ modern-browsers@0.1.9
 modules@0.19.0
 modules-runtime@0.13.1
 promise@0.12.2
-quave:email-postmark@1.0.4
+quave:email-postmark@1.1.0
 quave:settings@1.0.0
 react-fast-refresh@0.2.5
