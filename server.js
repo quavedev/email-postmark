@@ -17,16 +17,18 @@ if (!settings || !settings.apiToken) {
 
 const client = new postmark.ServerClient(settings.apiToken);
 
-export const getClient = () => client;
+export const getPostmarkClient = () => client;
+export const createPostmarkClient = ({apiToken}) => new postmark.ServerClient(apiToken);
 
-export const sendEmail = async ({ to, subject, content, from: fromParam, ...rest }) => {
+export const sendEmail = async ({ to, subject, content, from: fromParam, postmarkClient: clientParam, ...rest }) => {
+  const postmarkClient = clientParam || client;
   const from = fromParam || settings.from;
   if (!from) {
     throw new Meteor.Error(
       'email-postmark: Inform a global "from" in the settings or on each call'
     );
   }
-  return client.sendEmail({
+  return postmarkClient.sendEmail({
     From: from,
     To: to,
     Subject: subject,
