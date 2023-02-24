@@ -19,7 +19,7 @@ const client = new postmark.ServerClient(settings.apiToken);
 
 export const getClient = () => client;
 
-export const sendEmail = async ({ to, subject, content, from: fromParam }) => {
+export const sendEmail = async ({ to, subject, content, from: fromParam, ...rest }) => {
   const from = fromParam || settings.from;
   if (!from) {
     throw new Meteor.Error(
@@ -32,6 +32,7 @@ export const sendEmail = async ({ to, subject, content, from: fromParam }) => {
     Subject: subject,
     HtmlBody: content,
     MessageStream: 'outbound',
+    ...rest,
   });
 };
 
