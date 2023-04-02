@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.1 (2023-04-02)
+
+- Adds a new setting `devMode` to disable sending emails in development mode
+  - This mode also doesn't throw errors when the keys are missing
+
 ## 1.1.0 (2023-02-24)
 
 - Exposes `createPostmarkClientAccount` to call `new postmark.AccountClient`

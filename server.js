@@ -1,30 +1,53 @@
 /* global Package */
 
-import { Meteor } from 'meteor/meteor';
-import { Email } from 'meteor/email';
+import {Meteor} from 'meteor/meteor';
+import {Email} from 'meteor/email';
 import postmark from 'postmark';
 // eslint-disable-next-line import/no-unresolved
-import { getSettings } from 'meteor/quave:settings';
+import {getSettings} from 'meteor/quave:settings';
 
 const PACKAGE_NAME = 'quave:email-postmark';
-const settings = getSettings({ packageName: PACKAGE_NAME });
+const settings = getSettings({packageName: PACKAGE_NAME}) || {};
 
-if (!settings || !settings.apiToken) {
+if (!settings.apiToken && !settings.devMode) {
   throw new Meteor.Error(
     'email-postmark: Settings are missing, at least "apiToken" and "from" are required.'
   );
 }
 
-const client = new postmark.ServerClient(settings.apiToken);
-const accountClient = new postmark.AccountClient(settings.accountApiToken);
+function getClient() {
+  if (settings.devMode) {
+    return {
+      sendEmail: ({
+                    To,
+                    Subject,
+                    HtmlBody,
+                  }) => {
+        console.log(PACKAGE_NAME, `${To}:${Subject}`)
+        console.log(PACKAGE_NAME, HtmlBody)
+        Promise.resolve();
+      },
+    };
+  }
+  return new postmark.ServerClient(settings.apiToken);
+}
+
+const client = getClient();
 
 export const getPostmarkClient = () => client;
 export const createPostmarkClient = ({apiToken}) => new postmark.ServerClient(apiToken);
 
-export const getPostmarkAccountClient = () => accountClient;
+export const getPostmarkAccountClient = () => new postmark.AccountClient(settings.accountApiToken);
 export const createPostmarkAccountClient = ({apiToken}) => new postmark.AccountClient(apiToken);
 
-export const sendEmail = async ({ to, subject, content, from: fromParam, postmarkClient: clientParam, ...rest }) => {
+export const sendEmail = async ({
+                                  to,
+                                  subject,
+                                  content,
+                                  from: fromParam,
+                                  postmarkClient: clientParam,
+                                  ...rest
+                                }) => {
   const postmarkClient = clientParam || client;
   const from = fromParam || settings.from;
   if (!from) {
@@ -43,7 +66,7 @@ export const sendEmail = async ({ to, subject, content, from: fromParam, postmar
 };
 
 Email.customTransport = options => {
-  const { to, subject, html } = options;
+  const {to, subject, html} = options;
   const overrideOptions = Email.overrideOptionsBeforeSend
     ? Email.overrideOptionsBeforeSend(options)
     : {};
