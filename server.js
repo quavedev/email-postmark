@@ -24,7 +24,9 @@ function getClient() {
                     HtmlBody,
                   }) => {
         console.log(PACKAGE_NAME, `${To}:${Subject}`)
-        console.log(PACKAGE_NAME, HtmlBody)
+        if (!settings.devModeOnlySubject) {
+          console.log(PACKAGE_NAME, HtmlBody)
+        }
         Promise.resolve();
       },
     };

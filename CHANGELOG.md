@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.2 (2023-07-28)
+
+- Adds a new setting `devModeOnlySubject` to log only the subject in dev mode
+
 ## 1.1.1 (2023-04-02)
 
 - Adds a new setting `devMode` to disable sending emails in development mode
