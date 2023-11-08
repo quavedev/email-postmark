@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.2.2 (2023-11-8)
+
+- Excludes email@1.0.0 from compatibility list
+
+## 1.2.1 (2023-11-8)
+
+- Adds email@3.0.0 to versions of email, so it's compatible with Meteor 3.0 as well
+- Upgrades postmark dependency to latest (3.1.2)
+
+## 1.2.0 (2023-09-02)
+
+skipped
+
 ## 1.1.2 (2023-07-28)
 
 - Adds a new setting `devModeOnlySubject` to log only the subject in dev mode
