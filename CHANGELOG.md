@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.3 (2023-11-8)
+
+- Adds email@3.0.0-alpha300.17 to versions of email, so it's compatible with Meteor 3.0 as well
+
 ## 1.2.2 (2023-11-8)
 
 - Excludes email@1.0.0 from compatibility list

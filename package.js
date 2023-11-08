@@ -3,7 +3,7 @@
 Package.describe({
   name: 'quave:email-postmark',
   summary: 'Postmark support',
-  version: '1.2.2',
+  version: '1.2.3',
 });
 
 Npm.depends({
@@ -13,7 +13,7 @@ Npm.depends({
 Package.onUse(api => {
   api.versionsFrom('2.13.3');
 
-  api.use(['email@2.0.0||3.0.0'], ['server']);
+  api.use(['email@2.0.0||3.0.0||3.0.0-alpha300.17'], ['server']);
 
   api.use('ecmascript');
   api.use('quave:settings@1.0.0');
